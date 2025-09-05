@@ -27,6 +27,8 @@ if [ "$FFMPEG_INSTALL" == "apt" ] || [ "$FFMPEG_INSTALL" == "jetpack" ]; then
   apt-get clean
   rm -rf /var/lib/apt/lists/*
 elif [ "$FFMPEG_INSTALL" == "git" ]; then
+  export PKG_CONFIG_PATH=/opt/ffmpeg/dist/lib/pkgconfig:$PKG_CONFIG_PATH
+  echo "Current PKG_CONFIG_PATH: $PKG_CONFIG_PATH"
   apt-get update
   apt-get install -y --no-install-recommends \
       libass-dev \
@@ -45,7 +47,8 @@ elif [ "$FFMPEG_INSTALL" == "git" ]; then
       libx264-dev \
       libx265-dev \
       libopus-dev \
-      libdav1d-dev
+      libdav1d-dev \
+      libaom-dev
   apt-get clean
   rm -rf /var/lib/apt/lists/*
 
